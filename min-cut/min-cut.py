@@ -11,7 +11,7 @@ def readGraph():
 	with open(FILE, 'r') as f:
 		for l in f.readlines():
 			nodeLine = map(int, l.split())
-			graph.insert(nodeLine[0], nodeLine[1:])
+			graph.insert(nodeLine[0], [(x, 1) for x in nodeLine[1:]])
 	return graph
 
 def copy(graph):
