@@ -42,15 +42,12 @@ def union(p1, p2):
 
 def algo(edges, numPoints, target):
 	clusters = numPoints
-	curMax = 0
 	edges.sort(key=lambda e: e.dist)
 	for e in edges:
-		if (clusters == target and e.dist != curMax):
-			return e.dist
 		if (union(e.a, e.b)):
 			clusters -= 1
-			curMax = e.dist
-		# print('%s ch=%s'%(e, ch))
+			if clusters < target:
+				return e.dist
 	return None
 
 def readEdges():
@@ -62,14 +59,14 @@ def readEdges():
 		return points[num]
 
 	with open(FILE, 'r') as f:
-		num = f.readline()
+		num = int(f.readline())
 		for l in f.readlines():
 			lineValues = map(int, l.split())
 			a = node(lineValues[0])
 			b = node(lineValues[1])
 			edges.append(Edge(a, b, lineValues[2]))
-	return edges
+	return (num, edges)
 
 if __name__ == '__main__':
-	edges = readEdges()
-	print(algo(edges, 500, 4))
+	(numNodes, edges) = readEdges()
+	print(algo(edges, numNodes, 4))
