@@ -40,7 +40,7 @@ def calc(points):
 
 	m = sys.maxint
 	for j in xrange(2, np+1):
-		d = prev[frozenset(xrange(1, np+1))] + dists[j-1]
+		d = prev[frozenset(xrange(1, np+1))][j-1] + dists[j-1]
 		if d < m:
 			m = d
 	return m
